@@ -1,22 +1,22 @@
-## The database abstraction layer
+## La Capa de Abstracción de Datos (DAL)
 ``DAL``:inxx
 
-### Dependencies
+### Dependencias
 
-web2py comes with a Database Abstraction Layer (DAL), an API that maps Python objects into database objects such as queries, tables, and records. The DAL dynamically generates the SQL in real time using the specified dialect for the database back end, so that you do not have to write SQL code or learn different SQL dialects (the term SQL is used generically), and the application will be portable among different types of databases. At the time of this writing, the supported databases are SQLite (which comes with Python and thus web2py), PostgreSQL, MySQL, Oracle, MSSQL, FireBird, DB2, Informix, Ingres, the Google App Engine (SQL and NoSQL) and MongoDB. Experimentally we support more databases. Please check on the web2py web site and mailing list for more recent adapters. Google NoSQL is treated as a particular case in Chapter 13.
+Web2py viene con una Capa de Abstracción de Datos (DAL), una API que mapea objetos Python en objetos de base de datos como consultas, tablas y registros. DAL genera SQL dinamicamente en tiempo real usando el dialecto especificado por el servicio de base de datos, asi que no tendras que escribir codigo SQL o aprender distintos dialectos de SQL (el termino SQL es usado genericamente), y la aplicacion será portable entre distintos tipos de bases de datos. Al momento de escribir este libro, las bases de datos soportadas son SQLite (la cual viene con (Python y por ende con Web2py), PostgreSQL, MySQL, Oracle, MSSQL, Firebird, DB2, Informix, Ingres, the Google App Engine (SQL and NoSQL) y mongoDB. Experimentalmente soportamos mas bases de datos. Por favor revisa el sitio de web2py y la lista de correo para una lista mas reciente de adaptadores. Google NoSQL es tratado como un caso particular en el Capítulo 13.
 
-The Windows binary distribution works out of the box with SQLite and MySQL. The Mac binary distribution works out of the box with SQLite.
-To use any other database back-end, run from the source distribution and install the appropriate driver for the required back end.
+La distibución binaria de Windows funciona out of the box con SQLite y MySQL. Ls distribución binaria de Mac finciona out of the box con SQLite.
+Para usar cualquier otro servicio de base de datos, ejecute de la distribucion en codigo fuente e instale el controlador apropiado para el servicio.
 ``database drivers``:inxx
 
-Once the proper driver is installed, start web2py from source, and it will find the driver. Here is a list of drivers:
+Una vez que el controlador apropiado es instalado, ejecute web2py desde las fuentes y encontrará el controlador. Aqui hay una lista de controladores:
 
 ``DAL``:inxx ``SQLite``:inxx ``MySQL``:inxx ``PostgresSQL``:inxx ``Oracle``:inxx ``MSSQL``:inxx ``FireBird``:inxx ``DB2``:inxx ``Informix``:inxx ``Sybase``:inxx ``Teradata``:inxx ``MongoDB``:inxx ``CouchDB``:inxx ``SAPDB``:inxx ``Cubrid``:inxx
 
 ----------
-database | drivers (source)
-SQLite | sqlite3 or pysqlite2 or zxJDBC ``zxjdbc``:cite  (on Jython)
-PostgreSQL | psycopg2 ``psycopg2``:cite  or pg8000 ``pg8000``:cite or zxJDBC ``zxjdbc``:cite  (on Jython)
+base de datos | controlador (fuent)
+SQLite | sqlite3 ó pysqlite2 or zxJDBC ``zxjdbc``:cite  (on Jython)
+PostgreSQL | psycopg2 ``psycopg2``:cite  ó pg8000 ``pg8000``:cite or zxJDBC ``zxjdbc``:cite  (on Jython)
 MySQL | pymysql ``pymysql``:cite or MySQLdb ``mysqldb``:cite
 Oracle | cx_Oracle ``cxoracle``:cite
 MSSQL | pyodbc ``pyodbc``:cite
@@ -32,7 +32,7 @@ MongoDB | pymongo ``pymongo``:cite
 IMAP | imaplib ``IMAP``:cite 
 ---------
 
-``sqlite3``, ``pymysql``, ``pg8000``, and ``imaplib`` ship with web2py. Support of MongoDB is experimental. The IMAP option allows to use DAL to access IAMP.
+``sqlite3``, ``pymysql``, ``pg8000``, y ``imaplib`` se distribuyen con web2py. El soporte a MongoDB es experimental. La opcion IMAP permite usar DAL para acceder via  IMAP.
 
 web2py defines the following classes that make up the DAL:
 
