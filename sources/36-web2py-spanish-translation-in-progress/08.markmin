@@ -1,9 +1,9 @@
-## Email and SMS
+## Email y SMS
 ``Mail``:inxx
 
-### Setting up email
+### Configurando email
 
-Web2py provides the ``gluon.tools.Mail`` class to make it easy to send emails using web2py. One can define a mailer with
+Web2py provee la clase ``gluon.tools.Mail`` para hacer facil el envio de emails usando web2py. Se puede definir un mailer con:
 ``
 from gluon.tools import Mail
 mail = Mail()
@@ -12,7 +12,7 @@ mail.settings.sender = 'you@example.com'
 mail.settings.login = 'username:password'
 ``:code
 
-Note, if your application uses ``Auth`` (discussed in the next chapter), the ``auth`` object will include its own mailer in ``auth.settings.mailer``, so you can use that instead as follows:
+Nota, si tu aplicacion usa ``Auth`` (tratado en el proximo capitulo), el objeto ``auth`` incluirá su propio mailer en ``auth.settings.mailer``, asi que puedes usar ese en lugar de los siguiente:
 ``
 mail = auth.settings.mailer
 mail.settings.server = 'smtp.example.com:25'
@@ -20,32 +20,32 @@ mail.settings.sender = 'you@example.com'
 mail.settings.login = 'username:password'
 ``:code
 
-You need to replace the mail.settings with the proper parameters for your SMTP server. Set ``mail.settings.login = None`` if the SMTP server does not require authentication.
+Necesitas reemplazar mail.settings con los parametros apropiados para tu servidor SMTP. Asigna ``mail.settings.login = None`` si el servidor SMTP no require autenticacion.
 
 ``email logging``:inxx
 
 --------
-For debugging purposes you can set
+Para propositos de debugging puedes asignar
 ``
 mail.settings.server = 'logging'
 ``:code
-and emails will not be sent but logged to the console instead.
+y los emails no seran enviados pero se loguearan en la consola en lugar de eso.
 -------
 
-#### Configuring email for Google App Engine
+#### Configurando email para Google App Engine
 ``email from GAE``:inxx
-For sending emails from Google App Engine account:
+Para enviar mails desde una cuenta Google App Engine:
 
 ``
 mail.settings.server = 'gae'
 ``:code
 
-At the time of writing web2py does not support attachments and encrypted emails on Google App Engine.
+Al momento de escribir esto Web2py no soporta adjuntos ni emails encriptados sobre Google App Engine.
 
 #### x509 and PGP Encryption
 ``PGP``:inxx ``x509``:inxx
 
-It is possible to send x509 (SMIME) encrypted emails using the following settings:
+Es posible enviar emails encriptados x509 (SMIME)  usando la siguiente configuracion:
 ``
 mail.settings.cipher_type = 'x509'
 mail.settings.sign = True
@@ -56,7 +56,7 @@ mail.settings.x509_sign_certfile = 'filename.cert'
 mail.settings.x509_crypt_certfiles = 'filename.cert'
 ``:code
 
-It is possible to send PGP encrypted emails using the following settings:
+Es posible enviar emails firmados/encriptados con PGP usando la siguiente configuracion:
 ``
 from gpgme import pgp
 mail.settings.cipher_type = 'gpg'
@@ -65,30 +65,30 @@ mail.settings.sign_passphrase = 'your passphrase'
 mail.settings.encrypt = True
 ``:code
 
-The latter requires the python-pyme package.
+Lo siguiente requiere el paquete python-pyme.
 
 ### Sending emails
 ``mail.send``:inxx ``email html``:inxx ``email attachments``:inxx
 
-Once ``mail`` is defined, it can be used to send email via:
+Una vez que ``mail`` es definido, puede ser usado pra enviar emails via:
 ``
 mail.send(to=['somebody@example.com'],
           subject='hello',
-          # If reply_to is omitted, then mail.settings.sender is used
+          # si reply_to es omitido, entonces mail.settings.sender es utilizado
           reply_to='us@example.com',
           message='hi there')
 ``:code
 
-Mail returns ``True`` if it succeeds in sending the email and ``False`` otherwise.  A complete argument list for ``mail.send()`` is as follows:
+Mail devuelve ``True`` si tiene exito enviando el email y de otra manera devuelve ``False``.  Una lista completa de argumentos para ``mail.send()`` es la que siguiente:
 
 ``
 send(self, to, subject='None', message='None', attachments=1,
      cc=1, bcc=1, reply_to=1, encoding='utf-8',headers={})
 ``:code
 
-Note, ``to``, ``cc``, and ``bcc`` each take a list of email addresses.
+Note, ``to``, ``cc``, and ``bcc`` cada uno toma una lista de direcciones de email.
 
-``headers`` is dictionary of headers to refine the headers just before sending the email. For example:
+``headers`` es in diccionario de encabezados para redefinir los encabezados antes de enviar el email. Por ejemplo:
 
 ``
 headers = {'Return-Path' : 'bounces@example.org'}
