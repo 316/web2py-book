@@ -34,21 +34,21 @@ IMAP | imaplib ``IMAP``:cite
 
 ``sqlite3``, ``pymysql``, ``pg8000``, y ``imaplib`` se distribuyen con web2py. El soporte a MongoDB es experimental. La opcion IMAP permite usar DAL para acceder via  IMAP.
 
-web2py defines the following classes that make up the DAL:
+web2py define las siguientes clases que componen DAL:
 
-**DAL** represents a database connection. For example:
+**DAL** representa una conexion a la base de datos. Por ejemplo:
 ``sqlite``:inxx
 ``
 db = DAL('sqlite://storage.db')
 ``:code
 
 ``define_table``:inxx
-**Table** represents a database table.  You do not directly instantiate Table; instead, ``DAL.define_table`` instantiates it.
+**Table** representa una tabla de la base de datos.  No instancias directamente la table; en lugar de eso, ``DAL.define_table`` la instancia.
 ``
 db.define_table('mytable', Field('myfield'))
 ``:code
 
-The most important methods of a Table are:
+Los metodos mas importantes de la tabla son:
 ``insert``:inxx
 ``truncate``:inxx
 ``drop``:inxx
@@ -57,29 +57,29 @@ The most important methods of a Table are:
 ``.insert``, ``.truncate``, ``.drop``, and ``.import_from_csv_file``.
 
 ``Field``:inxx
-**Field** represents a database field. It can be instantiated and passed as an argument to ``DAL.define_table``.
+**Field** representa un campo de la base de datos. Puede ser instanciado y pasado como argumento a ``DAL.define_table``.
 
 ``Rows``:inxx
-**DAL Rows** ``Row``:inxx  is the object returned by a database select. It can be thought of as a list of ``Row`` rows:
+**DAL Rows** ``Row``:inxx   es el objeto retornado por un select en la base de datos. Puede ser como una lista de ``Row`` rows:
 ``
 rows = db(db.mytable.myfield!=None).select()
 ``:code
 
 ``Row``:inxx
-**Row** contains field values.
+**Row** contiene valores del campo.
 ``
 for row in rows:
     print row.myfield
 ``:code
 
 ``Query``:inxx
-**Query** is an object that represents a SQL "where" clause:
+**Query** es un objeto que representa una sentencia "where" SQL:
 ``
 myquery = (db.mytable.myfield != None) | (db.mytable.myfield > 'A')
 ``:code
 
 ``Set``:inxx
-**Set** is an object that represents a set of records. Its most important methods are ``count``, ``select``, ``update``, and ``delete``. For example:
+**Set** es un objeto que representa un conjunto de registros. Sus metodos mas importantes son ``count``, ``select``, ``update``, and ``delete``. Por ejemplo:
 ``
 myset = db(myquery)
 rows = myset.select()
@@ -88,7 +88,7 @@ myset.delete()
 ``:code
 
 ``Expression``:inxx
-**Expression** is something like an ``orderby`` or ``groupby`` expression. The Field class is derived from the Expression. Here is an example.
+**Expression** es algo como una expresión ``orderby`` ó ``groupby`` . El campo class es derivado de la expresion. Aqui un ejemplo.
 ``
 myorder = db.mytable.myfield.upper() | db.mytable.id
 db().select(db.table.ALL, orderby=myorder)
@@ -97,11 +97,11 @@ db().select(db.table.ALL, orderby=myorder)
 ### Connection strings
 ``connection strings``:inxx
 
-A connection with the database is established by creating an instance of the DAL object:
+Una conexion con la base de datos es establecida creando una instancia del objeto DAL: 
 ``
 >>> db = DAL('sqlite://storage.db', pool_size=0)
 ``:code
-``db`` is not a keyword; it is a local variable that stores the connection object ``DAL``. You are free to give it a different name. The constructor of ``DAL`` requires a single argument, the connection string. The connection string is the only web2py code that depends on a specific back-end database. Here are examples of connection strings for specific types of supported back-end databases (in all cases, we assume the database is running from localhost on its default port and is named "test"):
+``db`` no es una palabra reservada; es una variable local que almacena el objeto de conexion ``DAL``. Eres libre de darle un nombre distinto. El constructor de ``DAL`` requiere un solo argumento, la cadena de conexion. La cadena de conexion es el unico codigo de Web2py que depende especificamente del servicio de base de datos. Aqui hay ejemplos de cadenas de conexion especificos para servicios de bases de datos soportados (en todos los casos asumimos que la base de datos esta corriendo desde el localhost en su puerto por defecto y se llama "test"):
 
 -------------
 **SQLite**     | ``sqlite://storage.db``
